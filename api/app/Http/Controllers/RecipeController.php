@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\recipe;
+use App\Models\Recipe;
 use Illuminate\Http\Request;
 
 class RecipeController extends Controller
@@ -14,17 +14,7 @@ class RecipeController extends Controller
      */
     public function index()
     {
-        
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return Recipe::paginate(15);
     }
 
     /**
@@ -46,18 +36,7 @@ class RecipeController extends Controller
      */
     public function show($id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        return Recipe::find($id);
     }
 
     /**
@@ -80,15 +59,15 @@ class RecipeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        recipe::find($id)->delete();
     }
 
     public function like($id)
     {
-        recipe::findOrFail($id)->increment('likes');
+        recipe::find($id)->increment('likes');
     }
     public function disLike($id)
     {
-        recipe::findOrFail($id)->increment('disLikes');
+        recipe::find($id)->increment('disLikes');
     }
 }

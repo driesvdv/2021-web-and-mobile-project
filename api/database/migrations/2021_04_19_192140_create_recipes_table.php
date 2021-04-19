@@ -19,9 +19,9 @@ class CreateRecipesTable extends Migration
             $table->foreignId('step_id')->constrained();
             $table->string('name');
             $table->text('description');
-            $table->string('imageUrl');
-            $table->integer('likes');
-            $table->integer('dislikes');
+            $table->string('imageUrl')->nullable();
+            $table->integer('likes')->default(0);
+            $table->integer('dislikes')->default(0);
             $table->timestamps();
         });
     }
