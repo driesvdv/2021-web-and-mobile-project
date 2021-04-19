@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreRecipeRequest;
 use App\Models\Recipe;
 use Illuminate\Http\Request;
 
@@ -20,12 +21,12 @@ class RecipeController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param \App\Http\Requests\StoreRecipeRequest $request
+     * @return void
      */
-    public function store(Request $request)
+    public function store(StoreRecipeRequest $request)
     {
-        //
+        Recipe::create($request->validated());
     }
 
     /**
@@ -42,30 +43,43 @@ class RecipeController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \App\Http\Requests\StoreRecipeRequest $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreRecipeRequest $request, $id)
     {
-        //
+        $recipe = Recipe::find($id);
+
+        $recipe->update($request->validated());
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return void
      */
     public function destroy($id)
     {
         recipe::find($id)->delete();
     }
 
+    /**
+     * Adds one like to the recipe
+     *
+     * @param $id
+     */
     public function like($id)
     {
         recipe::find($id)->increment('likes');
     }
+    
+    /**
+     * Adds one dislike to the recipe
+     *
+     * @param $id
+     */
     public function disLike($id)
     {
         recipe::find($id)->increment('disLikes');
