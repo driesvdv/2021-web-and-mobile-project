@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreRecipeRequest;
 use App\Models\Recipe;
+use App\Models\Step;
 use Illuminate\Http\Request;
 
 class RecipeController extends Controller
@@ -18,14 +19,16 @@ class RecipeController extends Controller
         return Recipe::paginate(15);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param \App\Http\Requests\StoreRecipeRequest $request
-     * @return void
-     */
     public function store(StoreRecipeRequest $request)
     {
+        $recipe = $request->only(['name', 'description']);
+        $ingredients = $request->only('ingredients');
+        $steps = $request->only('steps');
+
+        $recipe = Recipe::make($recipe);
+        $recipe->user = auth()->user();
+        $recipe->steps = Step::make($steps);
+        return($recipe);
         Recipe::create($request->validated());
     }
 

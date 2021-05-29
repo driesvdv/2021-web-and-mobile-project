@@ -20,9 +20,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
-    Route::get('/user', function(Request $request) {
+    Route::get('/user', function (Request $request) {
         return auth()->user();
     });
+
+    Route::apiResource('/recipes', RecipeController::class);
 
     Route::post('/auth/logout', [AuthController::class, 'logout']);
 });
@@ -30,11 +32,9 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 Route::post('auth/register', [AuthController::class, 'register']);
 Route::post('auth/login', [AuthController::class, 'login']);
 
-Route::get('/basket', [BasketController::class, 'show']);
-Route::put('/recipes', [BasketController::class, 'like']);
+//testing purposes
+Route::get('basket', [BasketController::class, 'show']);
+Route::put('recipes', [BasketController::class, 'like']);
 
-Route::resource('users', UserController::class)->except(['index']);
-Route::resource('recipes', RecipeController::class);
-Route::resource('ingredients', IngredientController::class)->except(['index']);
-
+Route::apiResource('ingredients', IngredientController::class)->except(['index']);
 

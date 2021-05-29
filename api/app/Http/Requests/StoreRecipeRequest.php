@@ -2,9 +2,10 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Contracts\Validation\Validator;
 
-class StoreRecipeRequest extends FormRequest
+
+class StoreRecipeRequest extends APIRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +14,7 @@ class StoreRecipeRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,11 +25,14 @@ class StoreRecipeRequest extends FormRequest
     public function rules()
     {
         return [
-            'reaction_id' => 'required',
-            'step_id' => 'required',
             'name' => 'required|string',
-            'description' => 'required|text',
+            'description' => 'required|string',
             'imageUrl' => 'nullable',
+            'ingredients' => 'array',
+            'steps' => 'array',
+            'ingredients.*' => 'int',
+            'steps.*.name' => 'required|string',
+            'steps.*.description' => 'required|string'
         ];
     }
 }
