@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Recipe extends Model
@@ -13,12 +14,12 @@ class Recipe extends Model
 
     protected $guarded = [];
 
-    public function reactions()
+    public function reactions(): HasMany
     {
         return $this->hasMany(Reaction::class);
     }
 
-    public function steps()
+    public function steps(): HasMany
     {
         return $this->hasMany(Step::class);
     }

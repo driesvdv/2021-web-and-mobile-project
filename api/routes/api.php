@@ -30,6 +30,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
 Route::post('recipes/{id}/like', [RecipeController::class , 'like']);
 Route::post('recipes/{id}/dislike', [RecipeController::class , 'dislike']);
+Route::post('recipes/{id}/react', [RecipeController::class, 'react']);
 Route::apiResource('recipes', RecipeController::class);
 
 Route::post('auth/register', [AuthController::class, 'register']);

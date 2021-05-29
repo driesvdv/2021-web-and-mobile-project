@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreReactionRequest;
 use App\Http\Requests\StoreRecipeRequest;
 use App\Http\Resources\RecipeResource;
 use App\Models\Recipe;
@@ -98,5 +99,11 @@ class RecipeController extends Controller
     {
         recipe::find($id)->increment('disLikes');
         return $this->success("Disliked");
+    }
+
+    public function react($id, StoreReactionRequest $request)
+    {
+        recipe::find($id)->reactions()->create($request->validated());
+        return $this->success("Reaction added");
     }
 }
