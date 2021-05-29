@@ -15,6 +15,7 @@ class CreateReactionsTable extends Migration
     {
         Schema::create('reactions', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('recipe_id')->constrained();
             $table->text('reaction');
             $table->timestamps();
         });

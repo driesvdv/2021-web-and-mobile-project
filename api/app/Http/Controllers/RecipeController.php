@@ -74,7 +74,7 @@ class RecipeController extends Controller
     {
         recipe::find($id)->increment('likes');
     }
-    
+
     /**
      * Adds one dislike to the recipe
      *
