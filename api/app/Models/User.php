@@ -40,7 +40,14 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'plannedRecipes.pivot.date' => 'datetime:d/m/Y',
     ];
+
+    public function plannedRecipes()
+    {
+        return $this->belongsToMany(Recipe::class, 'user_recipe')
+            ->withPivot('date');
+    }
 
     public function recipes()
     {
