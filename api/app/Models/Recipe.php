@@ -13,6 +13,11 @@ class Recipe extends Model
 
     protected $guarded = [];
 
+    public function reactions()
+    {
+        return $this->hasMany(Reaction::class);
+    }
+
     public function steps()
     {
         return $this->hasMany(Step::class);
