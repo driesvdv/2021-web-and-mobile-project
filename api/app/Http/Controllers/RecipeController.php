@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreRecipeRequest;
 use App\Models\Recipe;
 use App\Models\Step;
-use Illuminate\Http\Request;
 
 class RecipeController extends Controller
 {
@@ -25,17 +24,27 @@ class RecipeController extends Controller
         $ingredients = $request->only('ingredients');
         $steps = $request->only('steps');
 
-        $recipe = Recipe::make($recipe);
-        $recipe->user = auth()->user();
-        $recipe->steps = Step::make($steps);
-        return($recipe);
+        $ingredients = (collect($ingredients["ingredients"])->mapWithKeys(function ($ingredient) {
+            return [$ingredient["ingredient_id"] => ["amount" => $ingredient["amount"]]];
+        }));
+
+        $recipe = auth()->user()->recipes()->create($recipe);
+        $recipe->steps()->createMany($steps["steps"]);
+        $recipe->ingredients()->attach($ingredients);
+
+
+//        return dump($ingredients);
+
+
+
+        return dump($recipe);
         Recipe::create($request->validated());
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -60,7 +69,7 @@ class RecipeController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return void
      */
     public function destroy($id)

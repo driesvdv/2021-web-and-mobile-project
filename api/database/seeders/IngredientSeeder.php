@@ -8,7 +8,7 @@ use Illuminate\Database\Seeder;
 class IngredientSeeder extends Seeder
 {
 
-    private array $ingredienten = ["gram" => "zout", "gram" => "boter", "aantal" => "wortelen", "aantal" => "kip"];
+    private array $ingredienten = ["zout" => "gram", "boter" => "gram", "wortelen" => "aantal", "kip" => "aantal"];
 
     /**
      * Run the database seeds.
@@ -17,7 +17,7 @@ class IngredientSeeder extends Seeder
      */
     public function run()
     {
-        foreach($this->ingredienten as $unit => $ingredient)
+        foreach($this->ingredienten as $ingredient => $unit)
         {
             Ingredient::create([
                 "name" => $ingredient,

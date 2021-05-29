@@ -30,7 +30,8 @@ class StoreRecipeRequest extends APIRequest
             'imageUrl' => 'nullable',
             'ingredients' => 'array',
             'steps' => 'array',
-            'ingredients.*' => 'int',
+            'ingredients.*.ingredient_id' => 'int',
+            'ingredients.*.amount' => 'int',
             'steps.*.name' => 'required|string',
             'steps.*.description' => 'required|string'
         ];
