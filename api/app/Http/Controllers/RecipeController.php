@@ -3,9 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreRecipeRequest;
+use App\Http\Resources\RecipeResource;
 use App\Models\Recipe;
 use App\Models\Step;
 use App\Traits\ApiResponser;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class RecipeController extends Controller
 {
@@ -14,11 +18,11 @@ class RecipeController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
-    public function index()
+    public function index(): AnonymousResourceCollection
     {
-        return Recipe::paginate(15);
+        return RecipeResource::collection(Recipe::orderBy("created_at")->limit(10)->get());
     }
 
     public function store(StoreRecipeRequest $request)
@@ -42,11 +46,11 @@ class RecipeController extends Controller
      * Display the specified resource.
      *
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return \App\Http\Resources\RecipeResource
      */
-    public function show($id)
+    public function show($id): RecipeResource
     {
-        return Recipe::find($id);
+        return new RecipeResource(Recipe::find($id));
     }
 
     /**
@@ -54,13 +58,11 @@ class RecipeController extends Controller
      *
      * @param \App\Http\Requests\StoreRecipeRequest $request
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function update(StoreRecipeRequest $request, $id)
+    public function update(Request $request, $id): JsonResponse
     {
-        $recipe = Recipe::find($id);
-
-        $recipe->update($request->validated());
+        return $this->error("Not implemented", 501);
     }
 
     /**
@@ -78,19 +80,23 @@ class RecipeController extends Controller
      * Adds one like to the recipe
      *
      * @param $id
+     * @return \Illuminate\Http\JsonResponse
      */
     public function like($id)
     {
         recipe::find($id)->increment('likes');
+        return $this->success("Liked");
     }
 
     /**
      * Adds one dislike to the recipe
      *
      * @param $id
+     * @return \Illuminate\Http\JsonResponse
      */
     public function disLike($id)
     {
         recipe::find($id)->increment('disLikes');
+        return $this->success("Disliked");
     }
 }

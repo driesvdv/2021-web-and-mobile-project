@@ -24,10 +24,13 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         return auth()->user();
     });
 
-    Route::apiResource('/recipes', RecipeController::class);
 
     Route::post('/auth/logout', [AuthController::class, 'logout']);
 });
+
+Route::post('recipes/{id}/like', [RecipeController::class , 'like']);
+Route::post('recipes/{id}/dislike', [RecipeController::class , 'dislike']);
+Route::apiResource('recipes', RecipeController::class);
 
 Route::post('auth/register', [AuthController::class, 'register']);
 Route::post('auth/login', [AuthController::class, 'login']);
