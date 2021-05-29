@@ -5,9 +5,12 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreRecipeRequest;
 use App\Models\Recipe;
 use App\Models\Step;
+use App\Traits\ApiResponser;
 
 class RecipeController extends Controller
 {
+    use ApiResponser;
+
     /**
      * Display a listing of the resource.
      *
@@ -32,13 +35,7 @@ class RecipeController extends Controller
         $recipe->steps()->createMany($steps["steps"]);
         $recipe->ingredients()->attach($ingredients);
 
-
-//        return dump($ingredients);
-
-
-
-        return dump($recipe);
-        Recipe::create($request->validated());
+        return $this->success($recipe, "Recipe has been saved", 201);
     }
 
     /**
