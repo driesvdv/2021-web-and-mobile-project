@@ -24,21 +24,19 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         return auth()->user();
     });
 
+    Route::post('recipes/{id}/like', [RecipeController::class , 'like']);
+    Route::post('recipes/{id}/dislike', [RecipeController::class , 'dislike']);
+    Route::post('recipes/{id}/react', [RecipeController::class, 'react']);
+    Route::apiResource('recipes', RecipeController::class);
 
     Route::post('/auth/logout', [AuthController::class, 'logout']);
 });
-
-Route::post('recipes/{id}/like', [RecipeController::class , 'like']);
-Route::post('recipes/{id}/dislike', [RecipeController::class , 'dislike']);
-Route::post('recipes/{id}/react', [RecipeController::class, 'react']);
-Route::apiResource('recipes', RecipeController::class);
 
 Route::post('auth/register', [AuthController::class, 'register']);
 Route::post('auth/login', [AuthController::class, 'login']);
 
 //testing purposes
 Route::get('basket', [BasketController::class, 'show']);
-Route::put('recipes', [BasketController::class, 'like']);
 
-Route::apiResource('ingredients', IngredientController::class)->except(['index']);
+Route::apiResource('ingredients', IngredientController::class)->except(['index', 'delete', 'update']);
 
