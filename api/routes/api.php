@@ -25,6 +25,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         return auth()->user();
     });
 
+    Route::apiResource('basket', BasketController::class);
     Route::apiResource('user/recipes', UserRecipeController::class);
 
     Route::post('recipes/{id}/like', [RecipeController::class , 'like']);
@@ -41,6 +42,6 @@ Route::post('auth/register', [AuthController::class, 'register']);
 Route::post('auth/login', [AuthController::class, 'login']);
 
 //testing purposes
-Route::get('basket', [BasketController::class, 'show']);
+//Route::get('basket', [BasketController::class, 'show']);
 
 

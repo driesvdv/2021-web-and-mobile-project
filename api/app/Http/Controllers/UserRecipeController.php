@@ -37,10 +37,11 @@ class UserRecipeController extends Controller
      * Display the specified resource.
      *
      * @param int $id
-     * @return \App\Http\Resources\RecipeResource
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function show($id): RecipeResource
+    public function show($id)
     {
+        return $this->error(null, 501);
     }
 
     /**
@@ -52,15 +53,17 @@ class UserRecipeController extends Controller
      */
     public function update(Request $request, $id): JsonResponse
     {
+        return $this->error(null, 501);
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param int $id
-     * @return void
+     * @return \Illuminate\Http\JsonResponse
      */
     public function destroy($id)
     {
+        return $this->error(null, 501);
     }
 }
