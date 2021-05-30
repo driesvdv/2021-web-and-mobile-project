@@ -39,10 +39,6 @@ class BasketController extends Controller
         });
 
         return $this->calc($ingredients);
-
-
-        return $ingredients;
-        return BasketResource::collection();
     }
 
     /**

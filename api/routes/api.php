@@ -25,7 +25,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         return auth()->user();
     });
 
-    Route::apiResource('basket', BasketController::class);
+    Route::apiResource('basket', BasketController::class)->only('index');
     Route::apiResource('user/recipes', UserRecipeController::class);
 
     Route::post('recipes/{id}/like', [RecipeController::class , 'like']);
