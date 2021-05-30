@@ -17,6 +17,7 @@ class IngredientResource extends JsonResource
         return [
             "name" => $this->name,
             "unit" => $this->unit,
+            "amount" => $this->pivot->amount
         ];
     }
 }
