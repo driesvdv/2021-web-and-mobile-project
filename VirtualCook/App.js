@@ -5,6 +5,8 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import React, { createContext, useEffect, useMemo, useReducer } from "react";
 import EncryptedStorage from "react-native-encrypted-storage";
 import axios from "axios";
+import Ionicons from 'react-native-vector-icons/Ionicons';
+
 
 
 import { HomeScreen } from "./screens/HomeScreen";
@@ -33,10 +35,10 @@ import {
   ReloadInstructions,
 } from "react-native/Libraries/NewAppScreen";
 import { RegisterScreen } from "./screens/Auth/RegisterScreen";
+import { LoggedInNavigator } from "./utils/navigator/LoggedInNavigator";
 
 
 const Stack = createStackNavigator();
-const Tab = createBottomTabNavigator();
 
 export default function App({ navigation }) {
 
@@ -143,45 +145,10 @@ export default function App({ navigation }) {
               <Stack.Screen name="SignUp" component={RegisterScreen} options={{ headerShown: false }} />
             </>
           ) : (
-            <Stack.Screen name="Home" component={HomeScreen} />
+            <Stack.Screen name="Home" component={LoggedInNavigator} />
           )}
         </Stack.Navigator>
       </AuthContext.Provider>
     </NavigationContainer>
-    // <NavigationContainer>
-    //   <Tab.Navigator
-    //     screenOptions={({ route }) => ({
-    //       tabBarIcon: ({ focused, color, size }) => {
-    //         let iconName;
-    //
-    //         if (route.name === "Home") {
-    //           iconName = focused ? "ios-home" : "ios-home-outline";
-    //         } else if (route.name === "Basket") {
-    //           iconName = focused ? "ios-basket" : "ios-basket-outline";
-    //         } else if (route.name === "Calendar") {
-    //           iconName = focused ? "ios-calendar" : "ios-calendar-outline";
-    //         }
-    //
-    //         return <Ionicons name={iconName} size={size} color={color} />;
-    //       },
-    //     })}
-    //     tabBarOptions={{
-    //       activeTintColor: "tomato",
-    //       inactiveTintColor: "gray",
-    //     }}
-    //   >
-    //     <Tab.Screen name="Home" component={HomeScreen} />
-    //     <Tab.Screen name="Calendar" component={CalendarScreen} />
-    //     {/*<Tab.Screen name="Basket" component={BasketScreen} />*/}
-    //     <Tab.Screen name="Basket" component={LoginScreen} />
-    //   </Tab.Navigator>
-    // </NavigationContainer>;
-  )
-    ;
+  );
 };
-
-const styles = StyleSheet.create({
-  text: {
-    color: "blue",
-  },
-});
