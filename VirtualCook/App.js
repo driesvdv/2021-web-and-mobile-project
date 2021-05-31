@@ -17,6 +17,7 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import { HomeScreen } from "./screens/HomeScreen";
 import { CalendarScreen } from "./screens/CalendarScreen";
 import { BasketScreen } from "./screens/BasketScreen";
+import { LoginScreen } from "./screens/Auth/LoginScreen";
 
 
 import {
@@ -67,7 +68,8 @@ const App: () => Node = () => {
       >
         <Tab.Screen name="Home" component={HomeScreen} />
         <Tab.Screen name="Calendar" component={CalendarScreen} />
-        <Tab.Screen name="Basket" component={BasketScreen} />
+        {/*<Tab.Screen name="Basket" component={BasketScreen} />*/}
+        <Tab.Screen name="Basket" component={LoginScreen} />
       </Tab.Navigator>
     </NavigationContainer>
   );
