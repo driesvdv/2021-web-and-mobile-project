@@ -1,17 +1,11 @@
 import React, { useContext, useState } from "react";
 import { StyleSheet, Text, TextInput, View, Alert, Pressable, Image } from "react-native";
-import { validateAll } from "indicative/validator";
-import {
-  Input,
-  Card,
-  FormValidationMessage,
-} from "react-native-elements";
 
 import {AuthContext} from "../../utils/authContext";
 
 import Logo from "./../../assets/images/logo.svg";
 
-export const LoginScreen = () => {
+export const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
@@ -26,7 +20,7 @@ export const LoginScreen = () => {
   };
 
   const register = () => {
-    console.log("registreren");
+    navigation.navigate('SignUp')
   };
 
   return (
@@ -90,7 +84,6 @@ const styles = StyleSheet.create({
   input: {
     fontFamily: "Roboto",
     fontWeight: "normal",
-    // width: "100%",
     height: 50,
     padding: 10,
     margin: 10,
@@ -133,6 +126,6 @@ const styles = StyleSheet.create({
     width:50,
     height: 50,
   },
-  register: {},
+  login: {},
 });
 
