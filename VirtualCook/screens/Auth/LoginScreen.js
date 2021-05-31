@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { StyleSheet, Text, TextInput, View, Alert, Pressable, Image } from "react-native";
 import { validateAll } from "indicative/validator";
 import {
@@ -7,6 +7,8 @@ import {
   FormValidationMessage,
 } from "react-native-elements";
 
+import {AuthContext} from "../../utils/authContext";
+
 import Logo from "./../../assets/images/logo.svg";
 
 export const LoginScreen = () => {
@@ -14,14 +16,17 @@ export const LoginScreen = () => {
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
 
-  const handleLogin = () => {
-    Alert.alert("inloggen");
 
+  const { signIn } = useContext(AuthContext);
+
+  const handleLogin = () => {
+    console.log(email, password);
+
+    signIn({email, password})
   };
 
   const register = () => {
-    Alert.alert("registreren");
-
+    console.log("registreren");
   };
 
   return (
