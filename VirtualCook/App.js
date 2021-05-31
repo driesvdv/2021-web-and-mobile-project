@@ -5,7 +5,6 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import React, { createContext, useEffect, useMemo, useReducer } from "react";
 import EncryptedStorage from "react-native-encrypted-storage";
 import axios from "axios";
-import Ionicons from 'react-native-vector-icons/Ionicons';
 
 
 
@@ -145,7 +144,7 @@ export default function App({ navigation }) {
               <Stack.Screen name="SignUp" component={RegisterScreen} options={{ headerShown: false }} />
             </>
           ) : (
-            <Stack.Screen name="Home" component={LoggedInNavigator} />
+            <Stack.Screen name="Home" component={LoggedInNavigator} options={{ headerShown: false }} />
           )}
         </Stack.Navigator>
       </AuthContext.Provider>
