@@ -14,6 +14,10 @@ import React from "react";
 import type { Node } from "react";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
+import { HomeScreen } from "./screens/HomeScreen";
+import { CalendarScreen } from "./screens/CalendarScreen";
+import { BasketScreen } from "./screens/BasketScreen";
+
 
 import {
   SafeAreaView,
@@ -33,30 +37,6 @@ import {
   ReloadInstructions,
 } from "react-native/Libraries/NewAppScreen";
 
-function HomeScreen() {
-  return (
-    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-      <Text>Home</Text>
-    </View>
-  );
-}
-
-function BasketScreen() {
-  return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text>Basket</Text>
-    </View>
-  );
-}
-
-
-function CalendarScreen() {
-  return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text>Calendar</Text>
-    </View>
-  );
-}
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
