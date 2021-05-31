@@ -15,6 +15,7 @@ import { LoginScreen } from "./screens/Auth/LoginScreen";
 import { AuthContext } from "./utils/authContext";
 
 import {
+  Alert,
   SafeAreaView,
   ScrollView,
   StatusBar,
@@ -68,27 +69,19 @@ export default function App({ navigation }) {
       userToken: null,
     });
 
-  React.useEffect(() => {
-    // Fetch the token from storage then navigate to our appropriate place
+  useEffect(() => {
+    // clearStorage()
     const bootstrapAsync = async () => {
       let userToken;
 
       try {
         const token = await EncryptedStorage.getItem("token");
-
         if (token !== undefined) {
-          console.log(token);
           userToken = token;
         }
       } catch (e) {
-        // Restoring token failed
+        console.log(e);
       }
-
-      // After restoring token, we may need to validate it in production apps
-
-      // This will switch to the App screen or Auth screen and this loading
-      // screen will be unmounted and thrown away.
-      console.log("value", value);
       dispatch({ type: "RESTORE_TOKEN", token: userToken });
     };
 
@@ -100,20 +93,23 @@ export default function App({ navigation }) {
       signIn: async data => {
         axios.post("http://10.0.2.2:8000/api/auth/login", data)
           .then(function({ data }) {
-            storeUserToken(data.data.token)
+            storeUserToken(data.data.token);
             dispatch({ type: "SIGN_IN", token: data.data.token });
-          }).catch(function(error) {
-          console.log(error);
+          }).catch(function({ response }) {
+          Alert.alert("Ongeldige login");
         });
       },
       signOut: () => dispatch({ type: "SIGN_OUT" }),
       signUp: async data => {
         axios.post("http://10.0.2.2:8000/api/auth/register", data)
           .then(function({ data }) {
-            storeUserToken(data.data.token)
+            storeUserToken(data.data.token);
             dispatch({ type: "SIGN_IN", token: data.data.token });
-          }).catch(function(error) {
-          console.log(error);
+          }).catch(function({ response }) {
+          let formatted = Object.keys(response.data.errors).flatMap((key) => {
+            return response.data.errors[key];
+          }).join("\n");
+          Alert.alert("Foute gegevens", formatted);
         });
       },
     }),
@@ -122,11 +118,16 @@ export default function App({ navigation }) {
 
   async function storeUserToken(token) {
     try {
-      await EncryptedStorage.setItem(
-        "token", token
-      );
-      console.log(token);
-      // Congrats! You've just stored your first value!
+      await EncryptedStorage.setItem("token", token);
+    } catch (error) {
+      // There was an error on the native side
+    }
+  }
+
+  async function clearStorage() {
+    try {
+      await EncryptedStorage.clear();
+      // Congrats! You've just cleared the device storage!
     } catch (error) {
       // There was an error on the native side
     }
