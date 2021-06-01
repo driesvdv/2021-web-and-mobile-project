@@ -1,11 +1,14 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { Image, StyleSheet, Text, View } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
 const RecipeComponent = () => {
   return (
     <View style={styles.cardStyle}>
-      <Text>afbeelding</Text>
+      <Image
+        style={styles.imageStyle}
+        source={require("./../../assets/images/defaultMeal.jpg")}
+      />
       <Text>Titel</Text>
     </View>
   );
@@ -14,13 +17,12 @@ const RecipeComponent = () => {
 const styles = StyleSheet.create({
   cardStyle: {
     backgroundColor: "white",
-    height: 75,
+    height: 350,
     marginHorizontal: 20,
     marginVertical: 10,
     borderRadius: 10,
-    flexDirection: "row",
     alignItems: "center",
-    justifyContent: "space-between",
+    justifyContent: "flex-start",
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -30,20 +32,11 @@ const styles = StyleSheet.create({
     shadowRadius: 3.84,
     elevation: 5,
   },
-  ingredientStyle: {
-    fontSize: 20,
-    marginHorizontal: 20,
-    color: "#2C2D2F",
-  },
-  descriptionStyle: {
-    fontSize: 15,
-    fontWeight: "bold",
-    color: "#ACACAD",
-  },
-  add: {
-    // height: 40,
-    // width: 40,
-    textAlign: 'center'
+  imageStyle: {
+    height: 200,
+    width: '100%',
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
   }
 });
 
