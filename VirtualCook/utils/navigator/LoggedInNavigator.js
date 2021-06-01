@@ -1,9 +1,10 @@
 import React from "react";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import { HomeScreen } from "../../screens/HomeScreen";
+import { HomeScreen } from "../../screens/Home/HomeScreen";
 import { CalendarScreen } from "../../screens/CalendarScreen";
 import { BasketScreen } from "../../screens/BasketScreen";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { HomeNavigator } from "./HomeNavigator";
 
 export const LoggedInNavigator = () => {
   const Tab = createBottomTabNavigator();
@@ -29,7 +30,7 @@ export const LoggedInNavigator = () => {
       inactiveTintColor: "gray",
     }}
   >
-    <Tab.Screen name="Home" component={HomeScreen} />
+    <Tab.Screen name="Home" component={HomeNavigator} />
     <Tab.Screen name="Kalender" component={CalendarScreen} />
     <Tab.Screen name="Winkelmandje" component={BasketScreen} />
   </Tab.Navigator>;

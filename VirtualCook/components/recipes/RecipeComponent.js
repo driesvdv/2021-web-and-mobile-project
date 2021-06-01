@@ -4,11 +4,11 @@ import { Alert, Image, StyleSheet, Text, View, Pressable } from "react-native";
 import HeartIcon from "./../../assets/icons/filledInHeart.svg";
 import axiosInstance from "../../utils/axiosInstance";
 
-const RecipeComponent = ({ recipe, reload, setReload }) => {
+const RecipeComponent = ({ recipe, reload, setReload, navigation }) => {
   const [liked, setLiked] = useState(false);
 
-  const moreInfo = (id) => {
-    Alert.alert(`Meer info ${id}`);
+  const moreInfo = () => {
+    navigation.navigate('Detail', {recipe: recipe})
   };
 
   const like = (id) => {
@@ -40,7 +40,7 @@ const RecipeComponent = ({ recipe, reload, setReload }) => {
         </Pressable>
       </View>
       <Text style={styles.descriptionStyle}>{recipe.description}</Text>
-      <Pressable style={styles.infoButtonStyle} onPress={() => moreInfo(recipe.id)}>
+      <Pressable style={styles.infoButtonStyle} onPress={() => moreInfo()}>
         <Text style={{ color: "white", fontWeight: "bold", fontSize: 16 }}>Meer info</Text>
       </Pressable>
     </View>

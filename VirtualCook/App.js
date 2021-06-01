@@ -8,7 +8,7 @@ import axios from "axios";
 
 
 
-import { HomeScreen } from "./screens/HomeScreen";
+import { HomeScreen } from "./screens/Home/HomeScreen";
 import { CalendarScreen } from "./screens/CalendarScreen";
 import { BasketScreen } from "./screens/BasketScreen";
 import { LoginScreen } from "./screens/Auth/LoginScreen";

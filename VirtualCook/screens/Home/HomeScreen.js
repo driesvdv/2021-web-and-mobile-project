@@ -1,18 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { FlatList, StyleSheet, Text, View } from "react-native";
-import EncryptedStorage from "react-native-encrypted-storage";
-import axiosInstance from "../utils/axiosInstance";
-import AddIngredientCtaComponent from "../components/recipes/AddIngredientCTAComponent";
-import RecipeComponent from "../components/recipes/RecipeComponent";
-export const HomeScreen = () => {
+import axiosInstance from "../../utils/axiosInstance";
+import AddIngredientCtaComponent from "../../components/recipes/AddIngredientCTAComponent";
+import RecipeComponent from "../../components/recipes/RecipeComponent";
+
+export const HomeScreen = ({ navigation }) => {
   const [recipes, setRecipes] = useState(null);
   const [reload, setReload] = useState(false);
 
   useEffect(() => {
     axiosInstance.get("/recipes")
       .then(({ data }) => {
-        console.log(data.data);
-        setRecipes(data.data)
+        setRecipes(data.data);
       }).catch(({ data }) => {
       console.log(data);
     });
@@ -21,11 +20,11 @@ export const HomeScreen = () => {
   return (
     <View style={{ marginTop: 30, marginBottom: 155 }}>
       <Text style={styles.header}>Overzicht</Text>
-      <AddIngredientCtaComponent/>
+      <AddIngredientCtaComponent />
       <FlatList
         data={recipes}
-        renderItem={({item, index}) => (
-          <RecipeComponent recipe={item} setReload={setReload} reload={reload} key={index} />
+        renderItem={({ item, index }) => (
+          <RecipeComponent recipe={item} setReload={setReload} reload={reload} key={index} navigation={navigation} />
         )}
         keyExtractor={(item, index) => index}
       />
