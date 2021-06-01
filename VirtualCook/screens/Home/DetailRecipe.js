@@ -1,5 +1,5 @@
 import React from "react";
-import { FlatList, Image, ScrollView, StyleSheet, Text, View } from "react-native";
+import { FlatList, Image, ScrollView, SectionList, StyleSheet, Text, View } from "react-native";
 import BackArrow from "./../../assets/icons/backArrow.svg";
 import Pressable from "react-native/Libraries/Components/Pressable/Pressable";
 import RecipeComponent from "../../components/recipes/RecipeComponent";
@@ -9,8 +9,23 @@ const DetailRecipe = ({ navigation, route }) => {
 
   const { recipe } = route.params;
 
+  const DATA = [
+    {
+      title: "Instructies",
+      data: recipe.steps
+    },
+    {
+      title: "Ingredienten",
+      data: recipe.ingredients
+    },
+    {
+      title: "Reacties",
+      data: recipe.reactions
+    }
+  ]
+
   return (
-    <FlatList
+    <SectionList
       style={styles.root}
       ListHeaderComponentStyle={{alignItems: "flex-start",
         justifyContent: "flex-start",}}
@@ -28,14 +43,17 @@ const DetailRecipe = ({ navigation, route }) => {
           </View>
           <Text style={styles.negativeSubTitle}>Beschrijving</Text>
           <Text style={styles.description}>{recipe.description}</Text>
-          <Text style={styles.subTitle}>Instructies</Text>
         </>
       }
-      data={recipe.steps}
+      sections={DATA}
+      // data={recipe.steps}
       renderItem={({ item, index }) => (
-        <StepComponent step={item} key={index} />
+        <StepComponent data={item} index={index} key={index} />
       )}
-      keyExtractor={(item, index) => index}
+      renderSectionHeader={({ section: { title } }) => (
+        <Text style={styles.subTitle}>{title}</Text>
+      )}
+      keyExtractor={(item, index) => index + item}
       ListFooterComponent={
         <Text style={{ marginHorizontal: "5%", fontWeight: "bold" }}>Gepubliceerd
         op {recipe.created_at.substring(0, 10)}</Text>

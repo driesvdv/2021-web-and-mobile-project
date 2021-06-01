@@ -42,7 +42,8 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   ingredientStyle: {
-    fontSize: 20,
+    fontSize: 16,
+    fontWeight: "bold",
     marginHorizontal: 20,
     color: "#2C2D2F",
   },
