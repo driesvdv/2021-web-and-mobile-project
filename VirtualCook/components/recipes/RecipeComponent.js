@@ -35,7 +35,7 @@ const RecipeComponent = ({ recipe, reload, setReload, navigation }) => {
         <Text style={styles.titleStyle}>{recipe.name}</Text>
         <Pressable onPress={() => like(recipe.id)}
                    style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-between" }}>
-          <HeartIcon width={25} height={25} fill={"#f8f"} />
+          <HeartIcon width={25} height={25}/>
           <Text style={{ margin: 5, fontSize: 20, fontWeight: "bold" }}>{recipe.likes}</Text>
         </Pressable>
       </View>
@@ -50,7 +50,7 @@ const RecipeComponent = ({ recipe, reload, setReload, navigation }) => {
 const styles = StyleSheet.create({
   cardStyle: {
     backgroundColor: "white",
-    marginHorizontal: 20,
+    marginHorizontal: '5%',
     marginVertical: 10,
     borderRadius: 10,
     alignItems: "flex-start",
@@ -73,6 +73,7 @@ const styles = StyleSheet.create({
   titleStyle: {
     fontSize: 25,
     fontWeight: "bold",
+    paddingRight: 10
   },
   descriptionStyle: {
     marginHorizontal: "5%",

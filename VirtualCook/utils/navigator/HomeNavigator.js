@@ -11,6 +11,6 @@ export const HomeNavigator = () => {
 
   return <Stack.Navigator>
     <Stack.Screen name="Home" component={HomeScreen} options={{ headerShown: false }} />
-    <Stack.Screen name="Detail" component={DetailRecipe} />
+    <Stack.Screen name="Detail" component={DetailRecipe} options={{ headerShown: false }} />
   </Stack.Navigator>;
 };
