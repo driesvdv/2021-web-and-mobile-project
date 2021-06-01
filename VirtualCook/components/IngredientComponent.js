@@ -5,10 +5,6 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 const IngredientComponent = ({ ingredient, ingredientDetails }) => {
   const { unit, amount } = ingredientDetails;
 
-  useEffect(() => {
-    console.log(ingredient, amount, unit);
-  });
-
   function capitalize(s)
   {
     return s[0].toUpperCase() + s.slice(1);

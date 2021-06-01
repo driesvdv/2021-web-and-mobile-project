@@ -1,28 +1,45 @@
 import React, { useEffect, useState } from "react";
-import { Text, View } from "react-native";
+import { FlatList, StyleSheet, Text, View } from "react-native";
 import EncryptedStorage from "react-native-encrypted-storage";
+import axiosInstance from "../utils/axiosInstance";
+import AddIngredientCtaComponent from "../components/recipes/AddIngredientCTAComponent";
 
 export const HomeScreen = () => {
   const [token, setToken] = useState(null);
 
   useEffect(() => {
-    retrieveUserSession();
-  })
-  async function retrieveUserSession() {
-    try {
-      const session = await EncryptedStorage.getItem("token");
-
-      if (session !== undefined) {
-        setToken(session)
-      }
-    } catch (error) {
-      // There was an error on the native side
-    }
-  }
+    axiosInstance.get("/recipes")
+      .then(({ data }) => {
+        console.log(data.data);
+      }).catch(({ data }) => {
+      console.log(data);
+    });
+  });
 
   return (
-    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-      <Text>Token: { token }</Text>
+    <View style={{ marginTop: 30 }}>
+      <Text style={styles.header}>Overzicht</Text>
+      <AddIngredientCtaComponent/>
+      <Text>test</Text>
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  header: {
+    fontSize: 30,
+    fontWeight: "bold",
+    color: "black",
+    marginBottom: 20,
+    marginHorizontal: 20,
+  },
+  cart: {
+    height: 50,
+    width: 50,
+    borderRadius: 10,
+    padding: 10,
+    marginVertical: 15,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+});

@@ -13,7 +13,6 @@ export const BasketScreen = () => {
     axiosInstance.get("/basket")
       .then(function({ data }) {
         setIngredients(data);
-        console.log(data.keys());
       }).catch(function(response) {
       console.log("failed", response);
     });
@@ -42,6 +41,7 @@ export const BasketScreen = () => {
 const styles = StyleSheet.create({
   header: {
     fontSize: 30,
+    fontWeight: "bold",
     color: "black",
     marginBottom: 20,
     marginHorizontal: 20,
