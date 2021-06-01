@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
 import { Alert, Image, StyleSheet, Text, View } from "react-native";
-import Ionicons from "react-native-vector-icons/Ionicons";
 import Pressable from "react-native/Libraries/Components/Pressable/Pressable";
+
+import HeartIcon from "./../../assets/icons/filledInHeart.svg"
 
 const RecipeComponent = ({ recipe }) => {
 
@@ -21,6 +22,10 @@ const RecipeComponent = ({ recipe }) => {
       />
       <View style={styles.bottomStyle}>
         <Text style={styles.titleStyle}>{recipe.name}</Text>
+        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+          <HeartIcon width={25} height={25} fill={'#f8f'} />
+          <Text style={{ margin: 5, fontSize: 20, fontWeight: 'bold' }}>2</Text>
+        </View>
       </View>
       <Text style={styles.descriptionStyle}>{recipe.description}</Text>
       <Pressable style={styles.infoButtonStyle} onPress={() => moreInfo(recipe.id)}>
@@ -56,15 +61,16 @@ const styles = StyleSheet.create({
   titleStyle: {
     fontSize: 25,
     fontWeight: "bold",
-    marginLeft: '5%',
-    marginVertical: '5%',
   },
   descriptionStyle: {
     marginHorizontal: '5%',
   },
   bottomStyle: {
     flexDirection: "row",
-    flexWrap: "wrap",
+    alignItems: "center",
+    justifyContent: "space-between",
+    margin: '5%',
+    width: '90%'
   },
   infoButtonStyle: {
     fontFamily: "Roboto",
