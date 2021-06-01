@@ -46,7 +46,6 @@ const DetailRecipe = ({ navigation, route }) => {
         </>
       }
       sections={DATA}
-      // data={recipe.steps}
       renderItem={({ item, index }) => (
         <StepComponent data={item} index={index} key={index} />
       )}
@@ -55,7 +54,7 @@ const DetailRecipe = ({ navigation, route }) => {
       )}
       keyExtractor={(item, index) => index + item}
       ListFooterComponent={
-        <Text style={{ marginHorizontal: "5%", fontWeight: "bold" }}>Gepubliceerd
+        <Text style={{ marginHorizontal: "5%", fontWeight: "bold", color: '#ACACAD', marginVertical: 10 }}>Gepubliceerd
         op {recipe.created_at.substring(0, 10)}</Text>
       }
     />

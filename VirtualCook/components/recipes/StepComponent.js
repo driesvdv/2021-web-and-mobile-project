@@ -6,7 +6,7 @@ const StepComponent = ({ data }) => {
   function capitalize(s) {
     return s[0].toUpperCase() + s.slice(1);
   }
-  
+
   if (data?.description) {
     return (
       <View style={styles.card}>
