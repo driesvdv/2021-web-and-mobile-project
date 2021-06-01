@@ -2,19 +2,20 @@ import React, { useEffect, useState } from "react";
 import { Text, View, StyleSheet, Alert } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import axios from "axios";
-import { axiosInstance } from "../utils/axiosInstance";
+import axiosInstance from "../utils/axiosInstance";
 
 export const BasketScreen = () => {
   const [ingredients, setIngredients] = useState([]);
 
   useEffect(() => {
-    axiosInstance().get("/basket")
-      .then(function({ data }) {
-        console.log(data);
-      }).catch(function({ response }) {
-        console.log(response.data);
+    axiosInstance.get("/basket")
+      .then(function( {data} ) {
+        setIngredients(data)
+        console.log("succes", data);
+      }).catch(function( response ) {
+        console.log("failed", response);
     });
-  });
+  }, []);
 
   return (
     <View style={{ marginLeft: 20, marginTop: 30 }}>
