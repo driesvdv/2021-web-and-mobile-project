@@ -2,8 +2,8 @@ import React from "react";
 import { FlatList, Image, ScrollView, SectionList, StyleSheet, Text, View } from "react-native";
 import BackArrow from "./../../assets/icons/backArrow.svg";
 import Pressable from "react-native/Libraries/Components/Pressable/Pressable";
-import RecipeComponent from "../../components/recipes/RecipeComponent";
 import StepComponent from "../../components/recipes/StepComponent";
+import AddReactionComponent from "../../components/reactions/AddReactionComponent";
 
 const DetailRecipe = ({ navigation, route }) => {
 
@@ -54,8 +54,11 @@ const DetailRecipe = ({ navigation, route }) => {
       )}
       keyExtractor={(item, index) => index + item}
       ListFooterComponent={
-        <Text style={{ marginHorizontal: "5%", fontWeight: "bold", color: '#ACACAD', marginVertical: 10 }}>Gepubliceerd
-        op {recipe.created_at.substring(0, 10)}</Text>
+        <>
+          <AddReactionComponent />
+          <Text style={{ marginHorizontal: "5%", fontWeight: "bold", color: '#ACACAD', marginVertical: 10 }}>Gepubliceerd
+          op {recipe.created_at.substring(0, 10)}</Text>
+        </>
       }
     />
   );
@@ -71,16 +74,6 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "black",
     marginBottom: 30,
-  },
-  cart: {
-    marginHorizontal: "5%",
-    height: 50,
-    width: 50,
-    borderRadius: 10,
-    padding: 10,
-    marginVertical: 15,
-    justifyContent: "center",
-    alignItems: "center",
   },
   backButton: {
     marginTop: 30,
