@@ -3,24 +3,31 @@ import { FlatList, StyleSheet, Text, View } from "react-native";
 import EncryptedStorage from "react-native-encrypted-storage";
 import axiosInstance from "../utils/axiosInstance";
 import AddIngredientCtaComponent from "../components/recipes/AddIngredientCTAComponent";
-
+import RecipeComponent from "../components/recipes/RecipeComponent";
 export const HomeScreen = () => {
-  const [token, setToken] = useState(null);
+  const [recipes, setRecipes] = useState(null);
 
   useEffect(() => {
     axiosInstance.get("/recipes")
       .then(({ data }) => {
         console.log(data.data);
+        setRecipes(data.data)
       }).catch(({ data }) => {
       console.log(data);
     });
-  });
+  }, []);
 
   return (
-    <View style={{ marginTop: 30 }}>
+    <View style={{ marginTop: 30, marginBottom: 155 }}>
       <Text style={styles.header}>Overzicht</Text>
       <AddIngredientCtaComponent/>
-      <Text>test</Text>
+      <FlatList
+        data={recipes}
+        renderItem={({item, index}) => (
+          <RecipeComponent recipe={item} key={index}/>
+        )}
+        keyExtractor={(item, index) => index}
+      />
     </View>
   );
 };
