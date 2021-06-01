@@ -6,6 +6,7 @@ import AddIngredientCtaComponent from "../components/recipes/AddIngredientCTACom
 import RecipeComponent from "../components/recipes/RecipeComponent";
 export const HomeScreen = () => {
   const [recipes, setRecipes] = useState(null);
+  const [reload, setReload] = useState(false);
 
   useEffect(() => {
     axiosInstance.get("/recipes")
@@ -15,7 +16,7 @@ export const HomeScreen = () => {
       }).catch(({ data }) => {
       console.log(data);
     });
-  }, []);
+  }, [reload]);
 
   return (
     <View style={{ marginTop: 30, marginBottom: 155 }}>
@@ -24,7 +25,7 @@ export const HomeScreen = () => {
       <FlatList
         data={recipes}
         renderItem={({item, index}) => (
-          <RecipeComponent recipe={item} key={index}/>
+          <RecipeComponent recipe={item} setReload={setReload} reload={reload} key={index} />
         )}
         keyExtractor={(item, index) => index}
       />
