@@ -25,7 +25,7 @@ export const LoggedInNavigator = () => {
       },
     })}
     tabBarOptions={{
-      activeTintColor: "tomato",
+      activeTintColor: "#E36D45",
       inactiveTintColor: "gray",
     }}
   >

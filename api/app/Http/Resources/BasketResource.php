@@ -14,10 +14,12 @@ class BasketResource extends JsonResource
      */
     public function toArray($request)
     {
+//        dd($this);
         return [
-            "name" => $this->name,
-            "unit" => $this->unit,
-            "amount" => $this->pivot->amount,
+//            "name" => $this->name,
+            "unit" => $this['unit'],
+            "amount" => $this['amount'],
+            "test" => "test"
         ];
     }
 }
