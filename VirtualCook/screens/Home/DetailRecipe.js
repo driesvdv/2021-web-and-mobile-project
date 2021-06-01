@@ -4,9 +4,9 @@ import BackArrow from "./../../assets/icons/backArrow.svg";
 import Pressable from "react-native/Libraries/Components/Pressable/Pressable";
 import StepComponent from "../../components/recipes/StepComponent";
 import AddReactionComponent from "../../components/reactions/AddReactionComponent";
+import axiosInstance from "../../utils/axiosInstance";
 
 const DetailRecipe = ({ navigation, route }) => {
-
   const { recipe } = route.params;
 
   const DATA = [
@@ -55,7 +55,7 @@ const DetailRecipe = ({ navigation, route }) => {
       keyExtractor={(item, index) => index + item}
       ListFooterComponent={
         <>
-          <AddReactionComponent />
+          <AddReactionComponent id={recipe.id} />
           <Text style={{ marginHorizontal: "5%", fontWeight: "bold", color: '#ACACAD', marginVertical: 10 }}>Gepubliceerd
           op {recipe.created_at.substring(0, 10)}</Text>
         </>
