@@ -22,6 +22,7 @@ const RecipeComponent = ({ recipe }) => {
       <View style={styles.bottomStyle}>
         <Text style={styles.titleStyle}>{recipe.name}</Text>
       </View>
+      <Text style={styles.descriptionStyle}>{recipe.description}</Text>
       <Pressable style={styles.infoButtonStyle} onPress={() => moreInfo(recipe.id)}>
         <Text style={{ color: "white", fontWeight: "bold", fontSize: 16 }}>Meer info</Text>
       </Pressable>
@@ -55,8 +56,11 @@ const styles = StyleSheet.create({
   titleStyle: {
     fontSize: 25,
     fontWeight: "bold",
-    marginLeft: '2.5%',
+    marginLeft: '5%',
     marginVertical: '5%',
+  },
+  descriptionStyle: {
+    marginHorizontal: '5%',
   },
   bottomStyle: {
     flexDirection: "row",
@@ -67,12 +71,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: "#FF9046",
-    width: "95%",
+    width: "90%",
     height: 50,
     padding: 10,
     borderRadius: 10,
-    marginBottom: 10,
-    marginLeft: '2.5%',
+    margin: '5%'
   }
 });
 
