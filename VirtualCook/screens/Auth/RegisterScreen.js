@@ -28,7 +28,7 @@ export const RegisterScreen = ({ navigation }) => {
       <Logo width={100} height={100} fill={"#000"} />
       <Text style={styles.logo}>Virtualcook</Text>
       <View style={styles.form}>
-        <Text>Naam</Text>
+        <Text style={styles.label}>Naam</Text>
         <TextInput
           label={"Naam"}
           placeholder={"Naam"}
@@ -40,7 +40,7 @@ export const RegisterScreen = ({ navigation }) => {
         />
       </View>
       <View style={styles.form}>
-        <Text>Email</Text>
+        <Text style={styles.label}>Email</Text>
         <TextInput
           label={"Email"}
           placeholder={"Email"}
@@ -53,7 +53,7 @@ export const RegisterScreen = ({ navigation }) => {
         />
       </View>
       <View style={styles.form}>
-        <Text>Wachtwoord</Text>
+        <Text style={styles.label}>Wachtwoord</Text>
         <TextInput
           label={"Wachtwoord"}
           placeholder={"Wachtwoord"}
@@ -67,7 +67,7 @@ export const RegisterScreen = ({ navigation }) => {
         />
       </View>
       <View style={styles.form}>
-        <Text>Wachtwoord bevestigen</Text>
+        <Text style={styles.label}>Wachtwoord bevestigen</Text>
         <TextInput
           label={"Wachtwoord bevestigen"}
           placeholder={"Wachtwoord bevestigen"}
@@ -151,5 +151,10 @@ const styles = StyleSheet.create({
     width: 50,
     height: 50,
   },
-  register: {},
+  label: {
+    marginHorizontal: 10,
+    marginBottom: -5,
+    fontSize: 16,
+    fontWeight: "bold",
+  },
 });

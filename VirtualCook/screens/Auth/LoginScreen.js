@@ -28,7 +28,7 @@ export const LoginScreen = ({ navigation }) => {
       <Logo width={100} height={100} fill={"#000"}/>
       <Text style={styles.logo}>Virtualcook</Text>
       <View style={styles.form}>
-        <Text>Email</Text>
+        <Text style={styles.label}>Email</Text>
         <TextInput
           label={"Email"}
           placeholder={"Email"}
@@ -41,7 +41,7 @@ export const LoginScreen = ({ navigation }) => {
         />
       </View>
       <View style={styles.form}>
-        <Text>Wachtwoord</Text>
+        <Text style={styles.label}>Wachtwoord</Text>
         <TextInput
           label={"Wachtwoord"}
           placeholder={"Wachtwoord"}
@@ -126,6 +126,11 @@ const styles = StyleSheet.create({
     width:50,
     height: 50,
   },
-  login: {},
+  label: {
+    marginHorizontal: 10,
+    marginBottom: -5,
+    fontSize: 16,
+    fontWeight: "bold",
+  },
 });
 
