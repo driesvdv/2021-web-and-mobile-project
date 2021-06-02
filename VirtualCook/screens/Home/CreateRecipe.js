@@ -14,14 +14,14 @@ const CreateRecipe = ({ navigation }) => {
   const [stepName, setStepName] = useState("");
   const [stepDescription, setStepDescription] = useState("");
 
-  const [ingredient_id, setIngredient_id] = useState(null);
+  const [ingredient_id, setIngredient_id] = useState(1);
   const [ingredientAmount, setIngredientAmount] = useState(null);
 
   const addIngredient = () => {
-    if(ingredientAmount > 0 && ingredient_id !== null) {
+    if(ingredientAmount !== null && ingredient_id !== null) {
       const oldArray = ingredients;
       setIngredients(oldArray => [...oldArray, { ingredient_id, amount: ingredientAmount }]);
-      setIngredient_id(null);
+      setIngredient_id(1);
       setIngredientAmount(null);
     }
   };
@@ -48,7 +48,7 @@ const CreateRecipe = ({ navigation }) => {
         navigation.popToTop();
       })
       .catch(({ response }) => {
-        console.log(response);
+        console.log(response.data);
       });
   };
 
@@ -106,13 +106,21 @@ const CreateRecipe = ({ navigation }) => {
             </Pressable>
           </View>
           <View style={styles.card}>
-            {ingredients.length !== 0 ? steps.map((ingredient, index) => {
-              return <Text>{ingredient.amount}</Text>;
+            {ingredients.length !== 0 ? ingredients.map((ingredient, index) => {
+              return <Text key={index}>{ingredient.amount}</Text>;
             }) : <Text style={[styles.label, { marginHorizontal: 0, marginBottom: 10, marginTop: 10, fontSize: 20 }]}>Nog
               geen ingredienten ingevoerd</Text>}
             <Text style={[styles.label, { marginHorizontal: 0, marginBottom: 10, marginTop: 10, fontSize: 20 }]}>Voeg
               ingredient toe</Text>
             <Text style={[styles.label, { marginHorizontal: 0, marginVertical: 10 }]}>Ingredient</Text>
+            <Picker
+              selectedValue={ingredient_id}
+              onValueChange={(itemValue, itemIndex) =>
+                setIngredient_id(itemValue)
+              }>
+              <Picker.Item label="Zout" value="1" key={1} />
+              <Picker.Item label="Boter" value="2" key={2} />
+            </Picker>
             {/*<TextInput*/}
             {/*  placeholder={"Naam"}*/}
             {/*  value={stepName}*/}
@@ -127,7 +135,7 @@ const CreateRecipe = ({ navigation }) => {
               onChangeText={setIngredientAmount}
               style={{ borderWidth: 1, borderRadius: 10 }}
             />
-            <Pressable style={styles.buttonStyle} onPress={() => addStep()}>
+            <Pressable style={styles.buttonStyle} onPress={() => addIngredient()}>
               <Text style={{ color: "white", fontWeight: "bold", fontSize: 16 }}>Voeg stap toe</Text>
             </Pressable>
           </View>
