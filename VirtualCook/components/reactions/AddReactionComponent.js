@@ -39,7 +39,8 @@ const styles = StyleSheet.create({
     fontWeight: "normal",
     height: 75,
     padding: 10,
-    marginVertical: 20,
+    marginTop: 10,
+    marginBottom: 15,
     marginHorizontal: "5%",
     backgroundColor: "#ffffff",
     shadowColor: "#000",
@@ -55,7 +56,7 @@ const styles = StyleSheet.create({
   },
   subTitle: {
     marginHorizontal: "5%",
-    marginTop: 25,
+    marginTop: 15,
     fontSize: 20,
     fontWeight: "bold",
   },

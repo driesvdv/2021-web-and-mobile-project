@@ -1,7 +1,6 @@
 import React from "react";
-import { FlatList, Image, ScrollView, SectionList, StyleSheet, Text, View } from "react-native";
+import { FlatList, Image, ScrollView, SectionList, StyleSheet, Text, View, Pressable, Alert } from "react-native";
 import BackArrow from "./../../assets/icons/backArrow.svg";
-import Pressable from "react-native/Libraries/Components/Pressable/Pressable";
 import StepComponent from "../../components/recipes/StepComponent";
 import AddReactionComponent from "../../components/reactions/AddReactionComponent";
 import axiosInstance from "../../utils/axiosInstance";
@@ -24,6 +23,10 @@ const DetailRecipe = ({ navigation, route }) => {
     }
   ]
 
+  const addToCalendar = () => {
+    Alert.alert("voeg toe aan kalender")
+  }
+
   return (
     <SectionList
       style={styles.root}
@@ -43,6 +46,11 @@ const DetailRecipe = ({ navigation, route }) => {
           </View>
           <Text style={styles.negativeSubTitle}>Beschrijving</Text>
           <Text style={styles.description}>{recipe.description}</Text>
+          { recipe?.date ? null :
+            <Pressable style={styles.infoButtonStyle} onPress={() => addToCalendar()}>
+              <Text style={{ color: "white", fontWeight: "bold", fontSize: 16 }}>Voeg recept toe aan kalender</Text>
+            </Pressable>
+          }
         </>
       }
       sections={DATA}
@@ -125,9 +133,20 @@ const styles = StyleSheet.create({
   },
   subTitle: {
     marginHorizontal: "5%",
-    marginTop: 25,
+    marginTop: 15,
     fontSize: 20,
     fontWeight: "bold",
+  },
+  infoButtonStyle: {
+    fontFamily: "Roboto",
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#FF9046",
+    width: "90%",
+    height: 50,
+    padding: 10,
+    borderRadius: 10,
+    margin: "5%",
   },
 
 });
