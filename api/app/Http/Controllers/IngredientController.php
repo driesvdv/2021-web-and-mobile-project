@@ -13,6 +13,11 @@ class IngredientController extends Controller
 {
     use ApiResponser;
 
+    public function index()
+    {
+        return Ingredient::all();
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -25,15 +30,9 @@ class IngredientController extends Controller
         return $this->success($request->validated());
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param \App\Models\Ingredient $ingredient
-     * @return \App\Http\Resources\IngredientResource
-     */
     public function show(Ingredient $ingredient)
     {
-        return new IngredientResource($ingredient);
+        return $ingredient;
     }
 
 }

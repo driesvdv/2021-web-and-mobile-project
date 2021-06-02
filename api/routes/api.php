@@ -33,7 +33,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('recipes/{id}/react', [RecipeController::class, 'react']);
     Route::apiResource('recipes', RecipeController::class);
 
-    Route::apiResource('ingredients', IngredientController::class)->except(['index', 'delete', 'update']);
+    Route::apiResource('ingredients', IngredientController::class)->except(['delete', 'update']);
 
     Route::post('/auth/logout', [AuthController::class, 'logout']);
 });

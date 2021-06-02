@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FlatList, Pressable, ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
 import BackArrow from "../../assets/icons/backArrow.svg";
 import axiosInstance from "../../utils/axiosInstance";
 import StepComponentAdd from "../../components/recipes/StepComponentAdd";
 import {Picker} from '@react-native-picker/picker';
+import IngredientComponentAdd from "../../components/recipes/IngredientComponentAdd";
 
 const CreateRecipe = ({ navigation }) => {
   const [name, setName] = useState("");
@@ -17,6 +18,8 @@ const CreateRecipe = ({ navigation }) => {
   const [ingredient_id, setIngredient_id] = useState(1);
   const [ingredientAmount, setIngredientAmount] = useState(null);
 
+  const [ingredientList, setIngredientList] = useState([])
+
   const addIngredient = () => {
     if(ingredientAmount !== null && ingredient_id !== null) {
       const oldArray = ingredients;
@@ -25,6 +28,17 @@ const CreateRecipe = ({ navigation }) => {
       setIngredientAmount(null);
     }
   };
+
+  useEffect(() => {
+    axiosInstance.get('ingredients')
+      .then(({data}) => {
+        console.log(data);
+        setIngredientList(data)
+      })
+      .catch(({response}) => {
+        console.log(response.data);
+      })
+  }, [])
 
   const addStep = () => {
     if (stepName.length > null) {
@@ -107,26 +121,23 @@ const CreateRecipe = ({ navigation }) => {
           </View>
           <View style={styles.card}>
             {ingredients.length !== 0 ? ingredients.map((ingredient, index) => {
-              return <Text key={index}>{ingredient.amount}</Text>;
+              return <IngredientComponentAdd ingredient={ingredient} key={index} />;
             }) : <Text style={[styles.label, { marginHorizontal: 0, marginBottom: 10, marginTop: 10, fontSize: 20 }]}>Nog
               geen ingredienten ingevoerd</Text>}
             <Text style={[styles.label, { marginHorizontal: 0, marginBottom: 10, marginTop: 10, fontSize: 20 }]}>Voeg
               ingredient toe</Text>
             <Text style={[styles.label, { marginHorizontal: 0, marginVertical: 10 }]}>Ingredient</Text>
-            <Picker
-              selectedValue={ingredient_id}
-              onValueChange={(itemValue, itemIndex) =>
-                setIngredient_id(itemValue)
-              }>
-              <Picker.Item label="Zout" value="1" key={1} />
-              <Picker.Item label="Boter" value="2" key={2} />
-            </Picker>
-            {/*<TextInput*/}
-            {/*  placeholder={"Naam"}*/}
-            {/*  value={stepName}*/}
-            {/*  onChangeText={setStepName}*/}
-            {/*  style={{borderWidth: 1, borderRadius: 10, height: 40}}*/}
-            {/*/>*/}
+            <View style={{borderWidth: 1, borderRadius: 10}}>
+              <Picker
+                selectedValue={ingredient_id}
+                onValueChange={(itemValue, itemIndex) =>
+                  setIngredient_id(itemValue)
+                }>
+                {ingredientList.map((ingredient, index) => {
+                  return <Picker.Item label={ingredient.name} value={ingredient.id} key={1} />
+                })}
+              </Picker>
+            </View>
             <Text style={[styles.label, { marginHorizontal: 0, marginVertical: 10 }]}>Aantal</Text>
             <TextInput
               keyboardType={"number-pad"}
