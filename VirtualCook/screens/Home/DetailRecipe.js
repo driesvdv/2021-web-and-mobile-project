@@ -4,6 +4,7 @@ import BackArrow from "./../../assets/icons/backArrow.svg";
 import StepComponent from "../../components/recipes/StepComponent";
 import AddReactionComponent from "../../components/reactions/AddReactionComponent";
 import axiosInstance from "../../utils/axiosInstance";
+import { useFocusEffect } from "@react-navigation/native";
 
 const DetailRecipe = ({ navigation, route }) => {
   const { recipe } = route.params;
@@ -11,27 +12,29 @@ const DetailRecipe = ({ navigation, route }) => {
   const DATA = [
     {
       title: "Instructies",
-      data: recipe.steps
+      data: recipe.steps,
     },
     {
       title: "Ingredienten",
-      data: recipe.ingredients
+      data: recipe.ingredients,
     },
     {
       title: "Reacties",
-      data: recipe.reactions
-    }
-  ]
+      data: recipe.reactions,
+    },
+  ];
 
   const addToCalendar = () => {
-    navigation.navigate('Add', {recipe})
-  }
+    navigation.navigate("Add", { recipe });
+  };
 
   return (
     <SectionList
       style={styles.root}
-      ListHeaderComponentStyle={{alignItems: "flex-start",
-        justifyContent: "flex-start",}}
+      ListHeaderComponentStyle={{
+        alignItems: "flex-start",
+        justifyContent: "flex-start",
+      }}
       ListHeaderComponent={
         <>
           <Pressable style={styles.backButton} onPress={() => navigation.goBack()}>
@@ -46,7 +49,7 @@ const DetailRecipe = ({ navigation, route }) => {
           </View>
           <Text style={styles.negativeSubTitle}>Beschrijving</Text>
           <Text style={styles.description}>{recipe.description}</Text>
-          { recipe?.date ? null :
+          {recipe?.date ? null :
             <Pressable style={styles.infoButtonStyle} onPress={() => addToCalendar()}>
               <Text style={{ color: "white", fontWeight: "bold", fontSize: 16 }}>Voeg recept toe aan kalender</Text>
             </Pressable>
@@ -64,8 +67,8 @@ const DetailRecipe = ({ navigation, route }) => {
       ListFooterComponent={
         <>
           <AddReactionComponent id={recipe.id} />
-          <Text style={{ marginHorizontal: "5%", fontWeight: "bold", color: '#ACACAD', marginVertical: 10 }}>Gepubliceerd
-          op {recipe.created_at.substring(0, 10)}</Text>
+          <Text style={{ marginHorizontal: "5%", fontWeight: "bold", color: "#ACACAD", marginVertical: 10 }}>Gepubliceerd
+            op {recipe.created_at.substring(0, 10)}</Text>
         </>
       }
     />
