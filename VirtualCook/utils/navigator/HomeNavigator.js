@@ -6,6 +6,7 @@ import { BasketScreen } from "../../screens/BasketScreen";
 import { createStackNavigator } from "@react-navigation/stack";
 import DetailRecipe from "../../screens/Home/DetailRecipe";
 import CreateRecipe from "../../screens/Home/CreateRecipe";
+import AddRecipeToCalendar from "../../screens/Home/AddRecipeToCalendar";
 
 export const HomeNavigator = () => {
   const Stack = createStackNavigator();
@@ -14,5 +15,6 @@ export const HomeNavigator = () => {
     <Stack.Screen name="Home" component={HomeScreen} options={{ headerShown: false }} />
     <Stack.Screen name="Detail" component={DetailRecipe} options={{ headerShown: false }} />
     <Stack.Screen name="Create" component={CreateRecipe} />
+    <Stack.Screen name="Add" component={AddRecipeToCalendar} />
   </Stack.Navigator>;
 };

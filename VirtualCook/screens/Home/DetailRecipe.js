@@ -24,7 +24,7 @@ const DetailRecipe = ({ navigation, route }) => {
   ]
 
   const addToCalendar = () => {
-    Alert.alert("voeg toe aan kalender")
+    navigation.navigate('Add')
   }
 
   return (
