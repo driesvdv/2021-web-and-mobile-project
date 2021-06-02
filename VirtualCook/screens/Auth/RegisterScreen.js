@@ -127,7 +127,7 @@ const styles = StyleSheet.create({
     fontFamily: "Roboto",
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#FFBC68",
+    backgroundColor: "#FF9046",
     width: "80%",
     height: 50,
     padding: 10,
