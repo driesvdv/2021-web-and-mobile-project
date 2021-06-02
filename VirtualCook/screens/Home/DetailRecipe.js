@@ -66,7 +66,7 @@ const DetailRecipe = ({ navigation, route }) => {
       keyExtractor={(item, index) => index + item}
       ListFooterComponent={
         <>
-          <AddReactionComponent id={recipe.id} />
+          <AddReactionComponent id={recipe.id} navigation={navigation} />
           <Text style={{ marginHorizontal: "5%", fontWeight: "bold", color: "#ACACAD", marginVertical: 10 }}>Gepubliceerd
             op {recipe.created_at.substring(0, 10)}</Text>
         </>

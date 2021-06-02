@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Text, TextInput, View, StyleSheet, Pressable, Alert } from "react-native";
 import axiosInstance from "../../utils/axiosInstance";
 
-const AddReactionComponent = ({ id }) => {
+const AddReactionComponent = ({ id, navigation }) => {
   const [reaction, setReaction] = useState("");
 
 
@@ -11,6 +11,7 @@ const AddReactionComponent = ({ id }) => {
       reaction: reaction,
     }).then(({ data }) => {
       setReaction('')
+      navigation.goBack()
     }).catch(error => {
       console.log(error);
     });
