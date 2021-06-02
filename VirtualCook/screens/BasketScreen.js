@@ -4,12 +4,13 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import axios from "axios";
 import axiosInstance from "../utils/axiosInstance";
 import IngredientComponent from "../components/IngredientComponent";
+import { useFocusEffect } from "@react-navigation/native";
 
 
 export const BasketScreen = () => {
   const [ingredients, setIngredients] = useState([]);
 
-  useEffect(() => {
+  useFocusEffect(() => {
     axiosInstance.get("/basket")
       .then(function({ data }) {
         setIngredients(data);

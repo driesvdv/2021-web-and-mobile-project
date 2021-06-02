@@ -5,6 +5,7 @@ import AddIngredientCtaComponent from "../../components/recipes/AddIngredientCTA
 import RecipeComponent from "../../components/recipes/RecipeComponent";
 import Logout from "../../assets/icons/logout.svg";
 import { AuthContext } from "../../utils/authContext";
+import { useFocusEffect } from "@react-navigation/native";
 
 export const HomeScreen = ({ navigation }) => {
   const [recipes, setRecipes] = useState(null);
@@ -12,7 +13,7 @@ export const HomeScreen = ({ navigation }) => {
 
   const { signOut } = useContext(AuthContext);
 
-  useEffect(() => {
+  useFocusEffect(() => {
     axiosInstance.get("/recipes")
       .then(({ data }) => {
         setRecipes(data.data);
