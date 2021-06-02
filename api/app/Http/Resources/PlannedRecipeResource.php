@@ -18,6 +18,7 @@ class PlannedRecipeResource extends JsonResource
             "date" => $this->pivot->date,
             "recipe_id" => $this->id,
             "name" => $this->name,
+            "description" => $this->description,
             "imageUrl" => $this->imageUrl,
             "likes" => $this->likes,
             "dislikes" => $this->dislikes,
