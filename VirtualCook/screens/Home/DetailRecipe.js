@@ -24,7 +24,7 @@ const DetailRecipe = ({ navigation, route }) => {
   ]
 
   const addToCalendar = () => {
-    navigation.navigate('Add')
+    navigation.navigate('Add', {recipe})
   }
 
   return (
