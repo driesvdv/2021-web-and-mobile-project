@@ -14,8 +14,7 @@ const IngredientComponent = ({ ingredient, ingredientDetails }) => {
     <View style={styles.cardStyle}>
       <Text style={styles.ingredientStyle}>{capitalize(ingredient)}</Text>
       <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginHorizontal: 20}}>
-        <Text style={styles.descriptionStyle}>{amount} {unit}</Text>
-        {/*<Ionicons name={"ios-close"} color={"white"} size={26} style={ styles.close } />*/}
+        <Text style={styles.descriptionStyle}>{unit}: {amount}</Text>
       </View>
     </View>
   );

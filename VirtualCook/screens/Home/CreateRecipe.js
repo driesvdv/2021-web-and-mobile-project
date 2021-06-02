@@ -20,15 +20,6 @@ const CreateRecipe = ({ navigation }) => {
 
   const [ingredientList, setIngredientList] = useState([])
 
-  const addIngredient = () => {
-    if(ingredientAmount !== null && ingredient_id !== null) {
-      const oldArray = ingredients;
-      setIngredients(oldArray => [...oldArray, { ingredient_id, amount: ingredientAmount }]);
-      setIngredient_id(1);
-      setIngredientAmount(null);
-    }
-  };
-
   useEffect(() => {
     axiosInstance.get('ingredients')
       .then(({data}) => {
@@ -39,6 +30,15 @@ const CreateRecipe = ({ navigation }) => {
         console.log(response.data);
       })
   }, [])
+
+  const addIngredient = () => {
+    if(ingredientAmount !== null && ingredient_id !== null) {
+      const oldArray = ingredients;
+      setIngredients(oldArray => [...oldArray, { ingredient_id, amount: ingredientAmount }]);
+      setIngredient_id(1);
+      setIngredientAmount(null);
+    }
+  };
 
   const addStep = () => {
     if (stepName.length > null) {
@@ -121,7 +121,7 @@ const CreateRecipe = ({ navigation }) => {
           </View>
           <View style={styles.card}>
             {ingredients.length !== 0 ? ingredients.map((ingredient, index) => {
-              return <IngredientComponentAdd ingredient={ingredient} key={index} />;
+              return <IngredientComponentAdd ingredient={ingredient} ingredientList={ingredientList} key={index} />;
             }) : <Text style={[styles.label, { marginHorizontal: 0, marginBottom: 10, marginTop: 10, fontSize: 20 }]}>Nog
               geen ingredienten ingevoerd</Text>}
             <Text style={[styles.label, { marginHorizontal: 0, marginBottom: 10, marginTop: 10, fontSize: 20 }]}>Voeg
