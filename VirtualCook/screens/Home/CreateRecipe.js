@@ -8,7 +8,7 @@ const CreateRecipe = ({ navigation }) => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [ingredients, setIngredients] = useState([]);
-  const [steps, setSteps] = useState([{name: "testnaam", description: "blablabla"}]);
+  const [steps, setSteps] = useState([]);
 
   const [stepName, setStepName] = useState("");
   const [stepDescription, setStepDescription] = useState("");
@@ -74,9 +74,9 @@ const CreateRecipe = ({ navigation }) => {
         <View style={styles.inputContainer}>
           <Text style={styles.label}>Instructies</Text>
           <View style={styles.card}>
-            {steps.map((step, index) => {
+            {steps.length !== 0 ? steps.map((step, index) => {
               return <StepComponentAdd step={step} key={index}/>
-            })}
+            }) : <Text style={[styles.label, {marginHorizontal: 0, marginBottom: 10, marginTop: 10, fontSize: 20}]}>Nog geen instructies ingevoerd</Text>}
             <Text style={[styles.label, {marginHorizontal: 0, marginBottom: 10, marginTop: 10, fontSize: 20}]}>Voeg instructie toe</Text>
             <Text style={[styles.label, {marginHorizontal: 0, marginVertical: 10 }]}>Naam</Text>
             <TextInput
@@ -85,17 +85,21 @@ const CreateRecipe = ({ navigation }) => {
               onChangeText={setStepName}
               style={{borderWidth: 1, borderRadius: 10, height: 40}}
             />
-            <Text style={[styles.label, {marginHorizontal: 0, marginVertical: 10 }]}>Beschrijving</Text>
+            <Text style={[styles.label, {marginHorizontal: 0, marginVertical: 10}]}>Beschrijving</Text>
             <TextInput
               placeholder={"Beschrijving"}
               value={stepDescription}
               onChangeText={setStepDescription}
-              style={{borderWidth: 1, borderRadius: 10, height: 60}}
+              style={{borderWidth: 1, borderRadius: 10, height: 60, textAlignVertical: "top"}}
             />
             <Pressable style={styles.buttonStyle} onPress={() => addStep()}>
               <Text style={{ color: "white", fontWeight: "bold", fontSize: 16 }}>Voeg stap toe</Text>
             </Pressable>
           </View>
+
+          <Pressable style={[styles.buttonStyle, {width: '90%', marginHorizontal: '5%'}]} onPress={() => addRecipe()}>
+            <Text style={{ color: "white", fontWeight: "bold", fontSize: 16 }}>Recept toevoegen</Text>
+          </Pressable>
         </View>
       </ScrollView>
 
