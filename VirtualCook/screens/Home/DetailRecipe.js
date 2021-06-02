@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FlatList, Image, ScrollView, SectionList, StyleSheet, Text, View, Pressable, Alert } from "react-native";
 import BackArrow from "./../../assets/icons/backArrow.svg";
 import StepComponent from "../../components/recipes/StepComponent";

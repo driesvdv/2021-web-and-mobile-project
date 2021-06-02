@@ -17,7 +17,7 @@ export const BasketScreen = () => {
       }).catch(function(response) {
       console.log("failed", response);
     });
-  }, []);
+  });
 
   return (
     <View style={{ marginTop: 30 }}>

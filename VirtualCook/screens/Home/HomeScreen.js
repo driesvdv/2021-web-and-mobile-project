@@ -20,6 +20,15 @@ export const HomeScreen = ({ navigation }) => {
       }).catch(({ data }) => {
       console.log(data);
     });
+  })
+
+  useEffect(() => {
+    axiosInstance.get("/recipes")
+      .then(({ data }) => {
+        setRecipes(data.data);
+      }).catch(({ data }) => {
+      console.log(data);
+    });
   }, [reload]);
 
   return (

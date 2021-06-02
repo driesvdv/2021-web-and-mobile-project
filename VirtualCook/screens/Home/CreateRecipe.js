@@ -39,6 +39,7 @@ const CreateRecipe = ({ navigation }) => {
     })
       .then(({ data }) => {
         console.log(data);
+        navigation.popToTop()
       })
       .catch(({ response }) => {
         console.log(response);
