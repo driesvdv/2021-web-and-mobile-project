@@ -106,14 +106,14 @@ const CreateRecipe = ({ navigation }) => {
               placeholder={"Naam"}
               value={stepName}
               onChangeText={setStepName}
-              style={{ borderWidth: 1, borderRadius: 10, height: 40 }}
+              style={{ borderWidth: 1, borderRadius: 10, height: 40, padding: 10 }}
             />
             <Text style={[styles.label, { marginHorizontal: 0, marginVertical: 10 }]}>Beschrijving</Text>
             <TextInput
               placeholder={"Beschrijving"}
               value={stepDescription}
               onChangeText={setStepDescription}
-              style={{ borderWidth: 1, borderRadius: 10, height: 60, textAlignVertical: "top" }}
+              style={{ borderWidth: 1, borderRadius: 10, height: 60, textAlignVertical: "top", padding: 10 }}
             />
             <Pressable style={styles.buttonStyle} onPress={() => addStep()}>
               <Text style={{ color: "white", fontWeight: "bold", fontSize: 16 }}>Voeg stap toe</Text>
@@ -144,7 +144,7 @@ const CreateRecipe = ({ navigation }) => {
               placeholder={"Aantal"}
               value={ingredientAmount}
               onChangeText={setIngredientAmount}
-              style={{ borderWidth: 1, borderRadius: 10 }}
+              style={{ borderWidth: 1, borderRadius: 10, padding:10}}
             />
             <Pressable style={styles.buttonStyle} onPress={() => addIngredient()}>
               <Text style={{ color: "white", fontWeight: "bold", fontSize: 16 }}>Voeg stap toe</Text>
