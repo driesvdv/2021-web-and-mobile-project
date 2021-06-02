@@ -16,9 +16,9 @@ export const LoggedInNavigator = () => {
 
         if (route.name === "Home") {
           iconName = focused ? "ios-home" : "ios-home-outline";
-        } else if (route.name === "Kalender") {
-          iconName = focused ? "ios-basket" : "ios-basket-outline";
         } else if (route.name === "Winkelmandje") {
+          iconName = focused ? "ios-basket" : "ios-basket-outline";
+        } else if (route.name === "Kalender") {
           iconName = focused ? "ios-calendar" : "ios-calendar-outline";
         }
 

@@ -39,6 +39,7 @@ const RecipeComponent = ({ recipe, reload, setReload, navigation }) => {
           <Text style={{ margin: 5, fontSize: 20, fontWeight: "bold" }}>{recipe.likes}</Text>
         </Pressable>
       </View>
+      {recipe?.date ? <Text style={styles.subTitle}>Gepland voor {recipe.date}</Text> : null}
       <Text style={styles.descriptionStyle}>{recipe.description}</Text>
       <Pressable style={styles.infoButtonStyle} onPress={() => moreInfo()}>
         <Text style={{ color: "white", fontWeight: "bold", fontSize: 16 }}>Meer info</Text>
@@ -95,6 +96,12 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 10,
     margin: "5%",
+  },
+  subTitle: {
+    marginHorizontal: "5%",
+    marginBottom: 10,
+    fontSize: 16,
+    fontWeight: "bold",
   },
 });
 
