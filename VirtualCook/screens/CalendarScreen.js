@@ -2,11 +2,12 @@ import React, { useEffect, useState } from "react";
 import { FlatList, StyleSheet, Text, View } from "react-native";
 import axiosInstance from "../utils/axiosInstance";
 import RecipeComponent from "../components/recipes/RecipeComponent";
+import { useFocusEffect } from "@react-navigation/native";
 
 export const CalendarScreen = ({ navigation }) => {
   const [recipes, setRecipes] = useState([])
 
-  useEffect(() => {
+  useFocusEffect(() => {
     axiosInstance.get('/user/recipes')
       .then(({data}) => {
         setRecipes(data.data)

@@ -1,5 +1,5 @@
 import React from "react";
-import { Pressable, StyleSheet, View } from "react-native";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 import BackArrow from "../../assets/icons/backArrow.svg";
 
 const CreateRecipe = ({ navigation }) => {
@@ -8,6 +8,8 @@ const CreateRecipe = ({ navigation }) => {
       <Pressable style={styles.backButton} onPress={() => navigation.goBack()}>
         <BackArrow width={30} height={30} />
       </Pressable>
+      <Text style={styles.header}>Recept toevoegen</Text>
+
     </View>
   );
 };
@@ -33,6 +35,13 @@ const styles = StyleSheet.create({
     shadowRadius: 16.00,
     elevation: 24,
     borderRadius: 10,
+  },
+  header: {
+    marginHorizontal: "5%",
+    fontSize: 30,
+    fontWeight: "bold",
+    color: "black",
+    marginBottom: 30,
   },
 })
 
