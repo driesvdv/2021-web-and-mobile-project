@@ -23,7 +23,7 @@ class RecipeController extends Controller
      */
     public function index(): AnonymousResourceCollection
     {
-        return RecipeResource::collection(Recipe::orderBy("created_at")->limit(10)->get());
+        return RecipeResource::collection(Recipe::orderBy("created_at", 'desc')->limit(10)->get());
     }
 
     public function store(StoreRecipeRequest $request)

@@ -31,7 +31,6 @@ class BasketController extends Controller
             ->wherePivot('date', '>=', Carbon::now()->startOfDay())
             ->wherePivot('date', '<', Carbon::now()->addWeeks(2)->startOfDay())
             ->with('ingredients')
-            ->limit(10)
             ->get();
 
         $ingredients = $plannedRecipes->flatMap(function ($recipe) {
