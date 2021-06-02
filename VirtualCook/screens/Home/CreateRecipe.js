@@ -2,46 +2,48 @@ import React, { useState } from "react";
 import { FlatList, Pressable, ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
 import BackArrow from "../../assets/icons/backArrow.svg";
 import axiosInstance from "../../utils/axiosInstance";
+import StepComponentAdd from "../../components/recipes/StepComponentAdd";
 
 const CreateRecipe = ({ navigation }) => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [ingredients, setIngredients] = useState([]);
-  const [steps, setSteps] = useState([]);
+  const [steps, setSteps] = useState([{name: "testnaam", description: "blablabla"}]);
 
-  const [stepName, setStepName] = useState('')
-  const [stepDescription, setStepDescription] = useState('')
+  const [stepName, setStepName] = useState("");
+  const [stepDescription, setStepDescription] = useState("");
 
-  const [ingredient_id, setIngredient_id] = useState(-1)
-  const [ingredientAmount, setIngredientAmount] = useState('')
+  const [ingredient_id, setIngredient_id] = useState(-1);
+  const [ingredientAmount, setIngredientAmount] = useState("");
 
   const addIngredient = () => {
-    setIngredients(...ingredients, {ingredient_id, amount: ingredientAmount})
-    setIngredient_id(-1)
-    setIngredientAmount('')
-  }
+    setIngredients(...ingredients, { ingredient_id, amount: ingredientAmount });
+    setIngredient_id(-1);
+    setIngredientAmount("");
+  };
 
   const addStep = () => {
-    setSteps(...steps, {name: stepName, description: stepDescription})
-    setStepName('')
-    setStepDescription('')
-  }
+    const oldArray = steps;
+    setSteps(oldArray => [...oldArray, { name: stepName, description: stepDescription }]);
+    setStepName("");
+    setStepDescription("");
+  };
 
 
   const addRecipe = () => {
-    axiosInstance.post('/recipes', {
+    axiosInstance.post("/recipes", {
       name,
       description,
       ingredients,
       steps,
     })
-      .then(({data}) => {
+      .then(({ data }) => {
         console.log(data);
       })
-      .catch(({response}) => {
+      .catch(({ response }) => {
         console.log(response);
-      })
-  }
+      });
+  };
 
   return (
     <View style={styles.root}>
@@ -69,17 +71,32 @@ const CreateRecipe = ({ navigation }) => {
             multiline={true}
           />
         </View>
-        {/*<View style={styles.inputContainer}>*/}
-        {/*  <Text style={styles.label}>Email</Text>*/}
-        {/*  <TextInput*/}
-        {/*    label={"Email"}*/}
-        {/*    placeholder={"Email"}*/}
-        {/*    value={email}*/}
-        {/*    onChangeText={setEmail}*/}
-        {/*    style={styles.input}*/}
-        {/*    autoCompleteType={"email"}*/}
-        {/*  />*/}
-        {/*</View>*/}
+        <View style={styles.inputContainer}>
+          <Text style={styles.label}>Instructies</Text>
+          <View style={styles.card}>
+            {steps.map((step, index) => {
+              return <StepComponentAdd step={step} key={index}/>
+            })}
+            <Text style={[styles.label, {marginHorizontal: 0, marginBottom: 10, marginTop: 10, fontSize: 20}]}>Voeg instructie toe</Text>
+            <Text style={[styles.label, {marginHorizontal: 0, marginVertical: 10 }]}>Naam</Text>
+            <TextInput
+              placeholder={"Naam"}
+              value={stepName}
+              onChangeText={setStepName}
+              style={{borderWidth: 1, borderRadius: 10, height: 40}}
+            />
+            <Text style={[styles.label, {marginHorizontal: 0, marginVertical: 10 }]}>Beschrijving</Text>
+            <TextInput
+              placeholder={"Beschrijving"}
+              value={stepDescription}
+              onChangeText={setStepDescription}
+              style={{borderWidth: 1, borderRadius: 10, height: 60}}
+            />
+            <Pressable style={styles.buttonStyle} onPress={() => addStep()}>
+              <Text style={{ color: "white", fontWeight: "bold", fontSize: 16 }}>Voeg stap toe</Text>
+            </Pressable>
+          </View>
+        </View>
       </ScrollView>
 
     </View>
@@ -133,6 +150,23 @@ const styles = StyleSheet.create({
     elevation: 3,
     borderRadius: 10,
   },
+  card:{
+    marginTop: "1%",
+    marginBottom: 15,
+    marginHorizontal: '5%',
+    width: '90%',
+    padding: 10,
+    backgroundColor: "#ffffff",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.22,
+    shadowRadius: 2.22,
+    elevation: 3,
+    borderRadius: 10,
+  },
   label: {
     marginHorizontal: "5%",
     marginTop: 0,
@@ -141,6 +175,17 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     marginBottom: 15,
+  },
+  buttonStyle: {
+    fontFamily: "Roboto",
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#FF9046",
+    width: "100%",
+    height: 50,
+    padding: 10,
+    borderRadius: 10,
+    marginVertical: 10,
   },
 });
 
