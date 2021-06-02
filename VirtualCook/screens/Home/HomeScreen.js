@@ -20,7 +20,7 @@ export const HomeScreen = ({ navigation }) => {
   return (
     <View style={{ marginTop: 30, marginBottom: 155 }}>
       <Text style={styles.header}>Overzicht</Text>
-      <AddIngredientCtaComponent />
+      <AddIngredientCtaComponent navigation={navigation}/>
       <FlatList
         data={recipes}
         renderItem={({ item, index }) => (

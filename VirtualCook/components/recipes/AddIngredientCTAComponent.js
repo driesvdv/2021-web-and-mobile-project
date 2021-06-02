@@ -1,15 +1,15 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
-const AddIngredientCtaComponent = () => {
+const AddIngredientCtaComponent = ({ navigation }) => {
   return (
-    <View style={styles.cardStyle}>
+    <Pressable style={styles.cardStyle} onPress={() => navigation.navigate('Create')}>
       <Text style={styles.ingredientStyle}>Voeg zelf recepten toe!</Text>
       <View style={{ justifyContent: "center", alignItems: "center", marginHorizontal: 20, height: 40, width: 40, backgroundColor: '#FF9046', borderRadius: 10}}>
         <Ionicons name={"ios-add"} color={"white"} size={40} style={ styles.add }  />
       </View>
-    </View>
+    </Pressable>
   );
 };
 
