@@ -3,6 +3,7 @@ import { FlatList, Pressable, ScrollView, StyleSheet, Text, TextInput, View } fr
 import BackArrow from "../../assets/icons/backArrow.svg";
 import axiosInstance from "../../utils/axiosInstance";
 import StepComponentAdd from "../../components/recipes/StepComponentAdd";
+import {Picker} from '@react-native-picker/picker';
 
 const CreateRecipe = ({ navigation }) => {
   const [name, setName] = useState("");
@@ -13,20 +14,25 @@ const CreateRecipe = ({ navigation }) => {
   const [stepName, setStepName] = useState("");
   const [stepDescription, setStepDescription] = useState("");
 
-  const [ingredient_id, setIngredient_id] = useState(-1);
-  const [ingredientAmount, setIngredientAmount] = useState("");
+  const [ingredient_id, setIngredient_id] = useState(null);
+  const [ingredientAmount, setIngredientAmount] = useState(null);
 
   const addIngredient = () => {
-    setIngredients(...ingredients, { ingredient_id, amount: ingredientAmount });
-    setIngredient_id(-1);
-    setIngredientAmount("");
+    if(ingredientAmount > 0 && ingredient_id !== null) {
+      const oldArray = ingredients;
+      setIngredients(oldArray => [...oldArray, { ingredient_id, amount: ingredientAmount }]);
+      setIngredient_id(null);
+      setIngredientAmount(null);
+    }
   };
 
   const addStep = () => {
-    const oldArray = steps;
-    setSteps(oldArray => [...oldArray, { name: stepName, description: stepDescription }]);
-    setStepName("");
-    setStepDescription("");
+    if (stepName.length > null) {
+      const oldArray = steps;
+      setSteps(oldArray => [...oldArray, { name: stepName, description: stepDescription }]);
+      setStepName("");
+      setStepDescription("");
+    }
   };
 
 
@@ -39,7 +45,7 @@ const CreateRecipe = ({ navigation }) => {
     })
       .then(({ data }) => {
         console.log(data);
-        navigation.popToTop()
+        navigation.popToTop();
       })
       .catch(({ response }) => {
         console.log(response);
@@ -76,29 +82,57 @@ const CreateRecipe = ({ navigation }) => {
           <Text style={styles.label}>Instructies</Text>
           <View style={styles.card}>
             {steps.length !== 0 ? steps.map((step, index) => {
-              return <StepComponentAdd step={step} key={index}/>
-            }) : <Text style={[styles.label, {marginHorizontal: 0, marginBottom: 10, marginTop: 10, fontSize: 20}]}>Nog geen instructies ingevoerd</Text>}
-            <Text style={[styles.label, {marginHorizontal: 0, marginBottom: 10, marginTop: 10, fontSize: 20}]}>Voeg instructie toe</Text>
-            <Text style={[styles.label, {marginHorizontal: 0, marginVertical: 10 }]}>Naam</Text>
+              return <StepComponentAdd step={step} key={index} />;
+            }) : <Text style={[styles.label, { marginHorizontal: 0, marginBottom: 10, marginTop: 10, fontSize: 20 }]}>Nog
+              geen instructies ingevoerd</Text>}
+            <Text style={[styles.label, { marginHorizontal: 0, marginBottom: 10, marginTop: 10, fontSize: 20 }]}>Voeg
+              instructie toe</Text>
+            <Text style={[styles.label, { marginHorizontal: 0, marginVertical: 10 }]}>Naam</Text>
             <TextInput
               placeholder={"Naam"}
               value={stepName}
               onChangeText={setStepName}
-              style={{borderWidth: 1, borderRadius: 10, height: 40}}
+              style={{ borderWidth: 1, borderRadius: 10, height: 40 }}
             />
-            <Text style={[styles.label, {marginHorizontal: 0, marginVertical: 10}]}>Beschrijving</Text>
+            <Text style={[styles.label, { marginHorizontal: 0, marginVertical: 10 }]}>Beschrijving</Text>
             <TextInput
               placeholder={"Beschrijving"}
               value={stepDescription}
               onChangeText={setStepDescription}
-              style={{borderWidth: 1, borderRadius: 10, height: 60, textAlignVertical: "top"}}
+              style={{ borderWidth: 1, borderRadius: 10, height: 60, textAlignVertical: "top" }}
+            />
+            <Pressable style={styles.buttonStyle} onPress={() => addStep()}>
+              <Text style={{ color: "white", fontWeight: "bold", fontSize: 16 }}>Voeg stap toe</Text>
+            </Pressable>
+          </View>
+          <View style={styles.card}>
+            {ingredients.length !== 0 ? steps.map((ingredient, index) => {
+              return <Text>{ingredient.amount}</Text>;
+            }) : <Text style={[styles.label, { marginHorizontal: 0, marginBottom: 10, marginTop: 10, fontSize: 20 }]}>Nog
+              geen ingredienten ingevoerd</Text>}
+            <Text style={[styles.label, { marginHorizontal: 0, marginBottom: 10, marginTop: 10, fontSize: 20 }]}>Voeg
+              ingredient toe</Text>
+            <Text style={[styles.label, { marginHorizontal: 0, marginVertical: 10 }]}>Ingredient</Text>
+            {/*<TextInput*/}
+            {/*  placeholder={"Naam"}*/}
+            {/*  value={stepName}*/}
+            {/*  onChangeText={setStepName}*/}
+            {/*  style={{borderWidth: 1, borderRadius: 10, height: 40}}*/}
+            {/*/>*/}
+            <Text style={[styles.label, { marginHorizontal: 0, marginVertical: 10 }]}>Aantal</Text>
+            <TextInput
+              keyboardType={"number-pad"}
+              placeholder={"Aantal"}
+              value={ingredientAmount}
+              onChangeText={setIngredientAmount}
+              style={{ borderWidth: 1, borderRadius: 10 }}
             />
             <Pressable style={styles.buttonStyle} onPress={() => addStep()}>
               <Text style={{ color: "white", fontWeight: "bold", fontSize: 16 }}>Voeg stap toe</Text>
             </Pressable>
           </View>
 
-          <Pressable style={[styles.buttonStyle, {width: '90%', marginHorizontal: '5%'}]} onPress={() => addRecipe()}>
+          <Pressable style={[styles.buttonStyle, { width: "90%", marginHorizontal: "5%" }]} onPress={() => addRecipe()}>
             <Text style={{ color: "white", fontWeight: "bold", fontSize: 16 }}>Recept toevoegen</Text>
           </Pressable>
         </View>
@@ -155,11 +189,11 @@ const styles = StyleSheet.create({
     elevation: 3,
     borderRadius: 10,
   },
-  card:{
+  card: {
     marginTop: "1%",
     marginBottom: 15,
-    marginHorizontal: '5%',
-    width: '90%',
+    marginHorizontal: "5%",
+    width: "90%",
     padding: 10,
     backgroundColor: "#ffffff",
     shadowColor: "#000",
